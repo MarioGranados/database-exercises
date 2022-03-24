@@ -60,7 +60,8 @@ SELECT dept_name, CONCAT(first_name, ' ', last_name) as full_name
 FROM employees
          JOIN dept_manager using (emp_no)
          JOIN departments using (dept_no)
-WHERE to_date LIKE '9999%' AND gender LIKE 'F';
+WHERE to_date LIKE '9999%'
+  AND gender LIKE 'F';
 
 /*Find the current titles of employees currently working in the Customer Service department.
 */
@@ -70,5 +71,20 @@ FROM titles
          JOIN departments using (dept_no)
 WHERE dept_no LIKE 'd009'
 GROUP BY title;
+
+/*Find the current salary of all current managers.
+*/
+select dept_name, concat(first_name, ' ', last_name) as full_name, salary
+from employees
+         join dept_manager using (emp_no)
+         join departments using (dept_no)
+         join salaries using (emp_no)
+WHERE dept_manager.to_date = '9999-01-01'
+  AND salaries.to_date = '9999-01-01';
+
+/*Bonus Find the names of all current employees, their department name, and their current manager's name .
+
+*/
+
 
 
